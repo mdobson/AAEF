@@ -1,0 +1,15 @@
+doctype html
+html(ng-app="project")
+  head
+    title= title
+    link(rel='stylesheet', href='/static/stylesheets/style.css')
+    script(type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js')
+    script(type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-resource.min.js')
+    script(type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-route.min.js')
+    script(type='text/javascript' src='/static/javascripts/todo.js')
+    script(type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.6/firebase.js')
+    script(type='text/javascript' src='https://cdn.firebase.com/libs/angularfire/0.7.0/angularfire.min.js')
+    script(type='text/javascript' src='https://cdn.firebase.com/js/simple-login/1.3.0/firebase-simple-login.js')
+    script(type='text/javascript' src='/static/javascripts/project.js')
+  body
+    block content

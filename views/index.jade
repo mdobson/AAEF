@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h2= 'Todo'
+  div(ng-controller='TodoCtrl')
+    span {{remaining()}} of {{todos.length}}
+    a(href='' ng-click='archive()') archive
+    ul
+      li(ng-repeat='todo in todos')
+        input(type='checkbox' ng-model='todo.done')
+        span {{todo.text}} is {{todo.done ? 'done' : 'not done' }}
+
+
+    form(ng-submit='addTodo()')
+      input(type='text' ng-model='todoText' size='30' placeholder='Add todo')
+      input(type='submit' value='add')

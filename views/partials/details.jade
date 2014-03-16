@@ -1,0 +1,20 @@
+form(name='myForm')
+  div(ng-class='{error: myForm.name.$invalid && !myform.name.$pristine}')
+    label Name
+    input(type='text' name='name' ng-model='project.name' required)
+    span(ng-show='myForm.name.$error.required && !myForm.name.$pristine') Required
+
+  div(ng-class='{error: myForm.site.$invalid && !myForm.site.$pristine}')
+    label Website
+    input(type='url' name='site' ng-model='project.site' required)
+    span(ng-show='myForm.site.$error.required && !myForm.name.$pristine') Required
+    span(ng-show='myForm.site.$error.url') Not a URL
+
+  label Description
+  textarea(name='description' ng-model='project.description')
+
+  br
+  a(href='#/') Cancel
+  button(ng-click='save()' ng-disabled='myForm.$invalid') Save
+  button(ng-click='destroy()' ng-show='project.$remove') Delete
+  
