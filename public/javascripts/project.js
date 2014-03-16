@@ -1,6 +1,6 @@
 angular.module('project', ['ngRoute', 'firebase'])
 
-.value('fbURL', '')
+.value('fbURL', 'https://angular-js.firebaseio.com/')
 
 .factory('Projects', function($firebase, fbURL){
   return $firebase(new Firebase(fbURL))
@@ -29,20 +29,20 @@ angular.module('project', ['ngRoute', 'firebase'])
     });
 })
 
-.controller('ListCtrl', function($scope, $firebaseSimpleLogin, Projects, fbURL){
+.controller('ListCtrl', ['$scope','$firebaseSimpleLogin', 'Projects', 'fbURL', function($scope, $firebaseSimpleLogin, Projects, fbURL){
   $scope.projects = Projects;
   $scope.loginObj = $firebaseSimpleLogin(new Firebase(fbURL))
-})
+}])
 
-.controller('CreateCtrl', function($scope, $location, $timeout, Projects){
+.controller('CreateCtrl', ['$scope', '$location', '$timeout', 'Projects' function($scope, $location, $timeout, Projects){
   $scope.save = function() {
     Projects.$add($scope.project, function(){
       $timeout(function(){ $location.path('/') });
     });
   };
-})
+}])
 
-.controller('EditCtrl',
+.controller('EditCtrl', ['$scope', '$location', '$routeParams', '$firebase', 'fbURL'
   function($scope, $location, $routeParams, $firebase, fbURL){
     var projectUrl = fbURL + $routeParams.projectId;
     $scope.project = $firebase(new Firebase(projectUrl));
@@ -56,9 +56,10 @@ angular.module('project', ['ngRoute', 'firebase'])
       $scope.project.save();
       $location.path('/')
     };
-  })
+  }]
+)
 
-.controller('LoginCtrl',
+.controller('LoginCtrl', ['$scope', '$location', '$firebaseSimpleLogin', 'fbURL'
   function($scope, $location, $firebaseSimpleLogin, fbURL){
     var ref = new Firebase(fbURL);
     $scope.loginObj = $firebaseSimpleLogin(ref);
@@ -68,5 +69,5 @@ angular.module('project', ['ngRoute', 'firebase'])
           .$login('twitter')
           .then(function(user){ $location.path('/') }, function(error){console.log(error)});
     };
-  }
+  }]
 );

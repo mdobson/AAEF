@@ -10,6 +10,7 @@ var http = require('http');
 var path = require('path');
 var argo = require('argo');
 var router = require('argo-url-router');
+var resource = require('argo-resource');
 
 var api = argo();
 api.use(router);
